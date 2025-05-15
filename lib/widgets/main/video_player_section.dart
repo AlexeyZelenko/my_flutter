@@ -70,7 +70,7 @@ class VideoPlayerSection extends StatelessWidget {
                 child: Text(
                   '3 минуты с пользой',
                   style: TextStyle(
-                    fontFamily: 'Object Sans',
+                    fontFamily: 'ObjectSans',
                     fontSize: 16.0,
                     height: 1.1,
                     letterSpacing: -0.5,
