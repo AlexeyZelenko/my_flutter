@@ -1,76 +1,111 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart'; // For potential icons like the arrow
+import 'package:flutter_svg/flutter_svg.dart';
 
 class DiagnosticsResultWidget extends StatelessWidget {
   const DiagnosticsResultWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    final containerWidth = screenWidth - 32; // Accounting for horizontal padding
+
     return Container(
-      width: 367,
+      width: containerWidth,
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
+      margin: const EdgeInsets.only(bottom: 16),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(24),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.05),
+            blurRadius: 8,
+            offset: const Offset(0, 2),
+          ),
+        ],
       ),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
+          // Header with title and expand button
           Stack(
+            alignment: Alignment.centerLeft, // Align children to the left
             children: [
-              const Padding(
-                padding: EdgeInsets.only(right: 32), // Отступ для стрелки
-                child: Text(
-                  'РЕЗУЛЬТАТ ДИАГНОСТИКИ',
-                  style: TextStyle(
-                    fontFamily: 'Grtsk Giga',
-                    fontWeight: FontWeight.w500,
-                    fontSize: 19,
-                    letterSpacing: -1.66516,
-                    color: Colors.black,
+              // Placeholder for the left icon
+              Padding(
+                padding: const EdgeInsets.only(right: 8, top: 15), // Added top padding for the icon
+                child: SvgPicture.asset(
+                  'assets/icons/heart_grey_selected.svg', // Замените на путь к вашему файлу
+                  width: 16,
+                  height: 16,
+                ),
+              ),
+
+              // Center-aligned title
+              const Center(
+                child: Padding(
+                  padding: EdgeInsets.only(top: 15), // Added top padding for the title to align visually
+                  child: Text(
+                    'РЕЗУЛЬТАТ\nДИАГНОСТИКИ',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontFamily: 'GrtskGiga',
+                      fontWeight: FontWeight.w500,
+                      fontSize: 19,
+                      letterSpacing: -1.66,
+                      height: 1.09,
+                      color: Colors.black,
+                    ),
                   ),
                 ),
               ),
+
+              // Red button with chevron
               Positioned(
-                top: 8,
-                right: 8,
+                top: 0,
+                right: 0,
                 child: Container(
                   width: 24,
                   height: 24,
-                  decoration: BoxDecoration(
-                    color: const Color(0xFFDF2B50),
-                    borderRadius: BorderRadius.circular(12),
+                  decoration: const BoxDecoration(
+                    color: Color(0xFFDF2B50),
+                    shape: BoxShape.circle,
                   ),
-                  child: Center(
-                    child: SvgPicture.asset(
-                      'assets/icons/chevron_down.svg', // Замените на вашу иконку стрелки
-                      width: 12,
-                      height: 16,
+                  child: const Center(
+                    child: Icon(
+                      Icons.chevron_right,
                       color: Colors.white,
+                      size: 16,
                     ),
                   ),
                 ),
               ),
             ],
           ),
+
           const SizedBox(height: 10),
+
+          // Date text
           const Text(
             'По тест-полоске от 23.10.2024',
             style: TextStyle(
-              fontFamily: 'Object Sans',
+              fontFamily: 'ObjectSans',
               fontWeight: FontWeight.w400,
               fontSize: 14,
               color: Color(0xFF7B878E),
             ),
           ),
+
           const SizedBox(height: 32),
+
+          // Risk indicators row
           Row(
             children: [
               Expanded(
                 child: _buildRiskIndicator(
                   label: 'Высокий риск\nвоспаления',
                   progressColor: const Color(0xFFDE949E),
-                  progressValue: 0.7, // Example value
+                  progressValue: 0.6, // Adjusted to match image
                 ),
               ),
               const SizedBox(width: 8),
@@ -78,7 +113,7 @@ class DiagnosticsResultWidget extends StatelessWidget {
                 child: _buildRiskIndicator(
                   label: 'Низкий риск\nкариеса',
                   progressColor: const Color(0xFF99D16E),
-                  progressValue: 0.3, // Example value
+                  progressValue: 0.15, // Adjusted to match image
                 ),
               ),
             ],
@@ -100,53 +135,37 @@ class DiagnosticsResultWidget extends StatelessWidget {
           label,
           textAlign: TextAlign.center,
           style: const TextStyle(
-            fontFamily: 'Object Sans',
+            fontFamily: 'ObjectSans',
             fontWeight: FontWeight.w400,
             fontSize: 14,
+            height: 1.0,
             color: Color(0xFF7B878E),
           ),
         ),
         const SizedBox(height: 12),
-        Stack(
-          alignment: Alignment.centerLeft,
-          children: [
-            Container(
-              height: 24,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(12),
-                color: progressColor.withOpacity(0.2),
-              ),
-            ),
-            ClipRRect(
-              borderRadius: BorderRadius.circular(12),
-              child: SizedBox(
-                height: 24,
-                width: 163.5 * progressValue, // Adjust width based on value
-                child: DecoratedBox(
-                  decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      colors: [progressColor.withOpacity(0.8), progressColor],
-                      stops: const [0.0, 1.0],
-                    ),
-                  ),
-                ),
-              ),
-            ),
-            Positioned(
-              right: 0,
-              child: Transform.rotate(
-                angle: -3.1415926535 * 180 / 180, // Rotate 180 degrees
+        Container(
+          height: 24,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(12),
+            color: progressColor.withOpacity(0.2),
+          ),
+          clipBehavior: Clip.hardEdge,
+          child: Stack(
+            children: [
+              // Gradient progress bar
+              Positioned(
+                left: 0,
                 child: Container(
-                  width: 24,
                   height: 24,
+                  width: progressValue * 100.0, // Dynamic width based on value
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(12),
                     color: progressColor,
+                    borderRadius: BorderRadius.circular(12),
                   ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ],
     );

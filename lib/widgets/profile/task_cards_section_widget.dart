@@ -1,8 +1,37 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart'; // For SVG icons
 
-class TaskCardsSectionWidget extends StatelessWidget {
+class TaskCardsSectionWidget extends StatefulWidget {
   const TaskCardsSectionWidget({super.key});
+
+  @override
+  State<TaskCardsSectionWidget> createState() => _TaskCardsSectionWidgetState();
+}
+
+class _TaskCardsSectionWidgetState extends State<TaskCardsSectionWidget> {
+  // Контроллер для PageView с настройкой размера видимой части
+  final PageController _pageController = PageController(viewportFraction: 0.45, initialPage: 0);
+  int _currentPage = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    // Слушатель для обновления индикатора текущей страницы
+    _pageController.addListener(() {
+      int next = _pageController.page!.round();
+      if (_currentPage != next) {
+        setState(() {
+          _currentPage = next;
+        });
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    _pageController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -45,25 +74,67 @@ class TaskCardsSectionWidget extends StatelessWidget {
       },
     ];
 
-    return SizedBox(
-      height: 169,
-      child: ListView.builder(
-        scrollDirection: Axis.horizontal,
-        padding: const EdgeInsets.symmetric(horizontal: 4),
-        itemCount: tasks.length,
-        itemBuilder: (context, index) {
-          final task = tasks[index];
-          return _buildTaskCard(
-            context,
-            stars: task['stars'],
-            subtitle: task['subtitle'],
-            description: task['description'],
-            iconPath: task['iconPath'],
-            gradient: task['gradient'] as Gradient,
-            isFirst: index == 0,
-          );
-        },
-      ),
+    return Column(
+      children: [
+        SizedBox(
+          height: 169,
+          child: PageView.builder(
+            controller: _pageController,
+            padEnds: true,
+            physics: const BouncingScrollPhysics(),
+            pageSnapping: true, // Обеспечивает привязку к странице при прокрутке
+            itemCount: tasks.length,
+            itemBuilder: (context, index) {
+                final task = tasks[index];
+                // Применяем анимацию масштабирования для текущей карточки
+                return AnimatedBuilder(
+                  animation: _pageController,
+                  builder: (context, child) {
+                    double value = 1.0;
+                    if (_pageController.position.haveDimensions) {
+                      value = (_pageController.page! - index).abs();
+                      value = (1 - (value * 0.3)).clamp(0.85, 1.0);
+                    }
+                    return Transform.scale(
+                      scale: value,
+                      child: child,
+                    );
+                  },
+                  child: _buildTaskCard(
+                    context,
+                    stars: task['stars'],
+                    subtitle: task['subtitle'],
+                    description: task['description'],
+                    iconPath: task['iconPath'],
+                    gradient: task['gradient'] as Gradient,
+                    isFirst: false,
+                  ),
+                );
+            },
+          ),
+        ),
+        const SizedBox(height: 16),
+        // Индикатор страниц
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: List.generate(
+            tasks.length,
+            (index) => AnimatedContainer(
+              duration: const Duration(milliseconds: 300),
+              margin: const EdgeInsets.symmetric(horizontal: 4),
+              height: 8,
+              width: _currentPage == index ? 24 : 8,
+              decoration: BoxDecoration(
+                color: _currentPage == index 
+                    ? const Color(0xFFDF2B50) 
+                    : const Color(0xFFDF2B50).withOpacity(0.3),
+                borderRadius: BorderRadius.circular(4),
+              ),
+            ),
+          ),
+        ),
+        const SizedBox(height: 10),
+      ],
     );
   }
 
@@ -95,7 +166,7 @@ class TaskCardsSectionWidget extends StatelessWidget {
     return Container(
       width: cardWidth,
       height: cardHeight,
-      margin: EdgeInsets.only(left: isFirst ? 0 : 6),
+      margin: const EdgeInsets.symmetric(horizontal: 6),
       decoration: BoxDecoration(
         gradient: gradient,
         borderRadius: BorderRadius.circular(borderRadius),
@@ -144,11 +215,21 @@ class TaskCardsSectionWidget extends StatelessWidget {
               fit: BoxFit.contain,
             ),
           ),
-          // Sparkle icon (placeholder)
+          // Sparkle icon
           Positioned(
             top: 12,
             right: 12,
-            child: Icon(Icons.wb_incandescent_outlined, color: Colors.white.withOpacity(0.8), size: 16),
+            child: Container(
+              width: 24,
+              height: 24,
+              decoration: BoxDecoration(
+                color: Colors.white.withOpacity(0.3),
+                borderRadius: BorderRadius.circular(12),
+              ),
+              child: const Center(
+                child: Icon(Icons.wb_sunny_outlined, color: Colors.white, size: 14),
+              ),
+            ),
           ),
         ],
       ),

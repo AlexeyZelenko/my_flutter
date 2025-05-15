@@ -18,31 +18,37 @@ class ProfileScreen extends StatelessWidget {
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
             colors: [
-              Color(0xFFE0F2FE), // Light blue - top part of the gradient from image
-              Color(0xFFFFFFFF), // White - bottom part
+              Color(0xFFBFC8EA),
+              Color(0xFFD0ECF9),
+              Color(0xFFF0FAFF),
+              Color(0xFFF5FAFF),
+              Color(0xFFFFFFFF),
             ],
-            stops: [0.0, 0.5], // Adjust stops for gradient appearance
+            stops: [0.0, 0.2336, 0.4136, 0.6282, 1.6592],
           ),
         ),
         child: SafeArea(
-          child: ListView(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0), // Adjusted padding to match design better
-            children: const [
-              ProfileHeaderWidget(),
-              StatsRowWidget(),
-              SizedBox(height: 16), // Spacing between sections
-              TaskCardsSectionWidget(),
-              DiagnosticsResultWidget(),
-              HygieneLevelWidget(),
-              MenuItemsWidget(),
-              SizedBox(height: 20), // Bottom padding
+          child: CustomScrollView(
+            slivers: [
+              SliverPadding(
+                padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                sliver: SliverList(
+                  delegate: SliverChildListDelegate([
+                    const ProfileHeaderWidget(),
+                    const StatsRowWidget(),
+                    const SizedBox(height: 16),
+                    const TaskCardsSectionWidget(),
+                    const DiagnosticsResultWidget(),
+                    const HygieneLevelWidget(),
+                    const MenuItemsWidget(),
+                    const SizedBox(height: 20),
+                  ]),
+                ),
+              ),
             ],
           ),
         ),
       ),
-      // Assuming the bottom navigation is global and handled by a parent Scaffold or similar.
-      // If specific to this screen, it would be added here.
-      // bottomNavigationBar: BottomNavigation(), // Example if needed
     );
   }
 }

@@ -7,7 +7,7 @@ class StatsRowWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 16.0),
+      padding: const EdgeInsets.only(bottom: 16.0),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
@@ -39,7 +39,7 @@ class StatsRowWidget extends StatelessWidget {
     required String count,
     required String label,
   }) {
-    const double cardWidth = 120;
+    const double cardWidth = 125;
     const double cardHeight = 84;
     const double borderRadius = 24.0;
     const double padding = 16.0;
@@ -49,10 +49,11 @@ class StatsRowWidget extends StatelessWidget {
 
     final TextStyle commonTextStyle = TextStyle(
       fontFamily: 'ObjectSans',
-      fontWeight: FontWeight.w400,
+      fontWeight: FontWeight.w500,
       fontSize: 12.0,
       height: 1.0, // 100%
       letterSpacing: 0.0,
+      color: Colors.black,
     );
 
     final TextStyle countTextStyle = TextStyle(
@@ -61,7 +62,7 @@ class StatsRowWidget extends StatelessWidget {
       fontSize: 14.0,
       height: 1.2, // 120%
       letterSpacing: 0.0,
-      color: Theme.of(context).primaryColorDark ?? Colors.black87,
+      color: Colors.black38,
     );
 
     return Container(
@@ -85,7 +86,7 @@ class StatsRowWidget extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               SvgPicture.asset(
@@ -94,9 +95,13 @@ class StatsRowWidget extends StatelessWidget {
                 width: 24,
                 height: 24,
               ),
-              Text(
-                count,
-                style: countTextStyle,
+              SizedBox(
+                width: 25,
+                child: Text(
+                  count,
+                  style: countTextStyle,
+                  textAlign: TextAlign.end,
+                ),
               ),
             ],
           ),
