@@ -1,16 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart'; // For SVG icons if used
+import 'package:flutter_svg/flutter_svg.dart'; // For SVG icons
 
 class StatsRowWidget extends StatelessWidget {
   const StatsRowWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
-    // Placeholder colors and styles
-    const Color cardBackgroundColor = Colors.white;
-    const Color textColor = Colors.black54;
-    const Color iconColor = Colors.black54;
-
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 16.0),
       child: Row(
@@ -18,30 +13,21 @@ class StatsRowWidget extends StatelessWidget {
         children: [
           _buildStatItem(
             context,
-            iconPath: 'assets/icons/orders_placeholder.svg', // Placeholder
+            iconPath: 'assets/icons/shopping-basket.svg',
             count: '70',
             label: 'Мои заказы',
-            iconColor: iconColor,
-            textColor: textColor,
-            cardBackgroundColor: cardBackgroundColor,
           ),
           _buildStatItem(
             context,
-            iconPath: 'assets/icons/cart_placeholder.svg', // Placeholder
+            iconPath: 'assets/icons/shopping-basket-line.svg',
             count: '3',
             label: 'Корзина',
-            iconColor: iconColor,
-            textColor: textColor,
-            cardBackgroundColor: cardBackgroundColor,
           ),
           _buildStatItem(
             context,
-            iconPath: 'assets/icons/favorites_placeholder.svg', // Placeholder
+            iconPath: 'assets/icons/heart.svg',
             count: '22',
             label: 'Избранное',
-            iconColor: iconColor,
-            textColor: textColor,
-            cardBackgroundColor: cardBackgroundColor,
           ),
         ],
       ),
@@ -52,46 +38,71 @@ class StatsRowWidget extends StatelessWidget {
     required String iconPath,
     required String count,
     required String label,
-    required Color iconColor,
-    required Color textColor,
-    required Color cardBackgroundColor,
   }) {
+    const double cardWidth = 120;
+    const double cardHeight = 84;
+    const double borderRadius = 24.0;
+    const double padding = 16.0;
+    const Color textColor = Colors.black54;
+    const Color iconColor = Colors.black54;
+    const Color cardBackgroundColor = Colors.white;
+
+    final TextStyle commonTextStyle = TextStyle(
+      fontFamily: 'ObjectSans',
+      fontWeight: FontWeight.w400,
+      fontSize: 12.0,
+      height: 1.0, // 100%
+      letterSpacing: 0.0,
+    );
+
+    final TextStyle countTextStyle = TextStyle(
+      fontFamily: 'GolosText',
+      fontWeight: FontWeight.w400,
+      fontSize: 14.0,
+      height: 1.2, // 120%
+      letterSpacing: 0.0,
+      color: Theme.of(context).primaryColorDark ?? Colors.black87,
+    );
+
     return Container(
-      padding: const EdgeInsets.all(12.0),
+      width: cardWidth,
+      height: cardHeight,
+      padding: const EdgeInsets.all(padding),
       decoration: BoxDecoration(
         color: cardBackgroundColor,
-        borderRadius: BorderRadius.circular(12.0),
+        borderRadius: BorderRadius.circular(borderRadius),
         boxShadow: [
           BoxShadow(
             color: Colors.grey.withOpacity(0.1),
             spreadRadius: 1,
             blurRadius: 5,
-            offset: const Offset(0, 2), // changes position of shadow
+            offset: const Offset(0, 2),
           ),
         ],
       ),
       child: Column(
-        mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Using a placeholder Icon for now, replace with SvgPicture.asset(iconPath) if you have SVGs
-          Icon(Icons.shopping_bag_outlined, color: iconColor, size: 24), // Placeholder icon
-          // SvgPicture.asset(iconPath, color: iconColor, width: 24, height: 24),
-          const SizedBox(height: 8),
-          Text(
-            count,
-            style: TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.bold,
-              color: Theme.of(context).primaryColorDark, // Or a specific color
-            ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SvgPicture.asset(
+                iconPath,
+                colorFilter: ColorFilter.mode(iconColor, BlendMode.srcIn),
+                width: 24,
+                height: 24,
+              ),
+              Text(
+                count,
+                style: countTextStyle,
+              ),
+            ],
           ),
-          const SizedBox(height: 4),
           Text(
             label,
-            style: TextStyle(
-              fontSize: 12,
-              color: textColor,
-            ),
+            style: commonTextStyle.copyWith(color: textColor),
           ),
         ],
       ),

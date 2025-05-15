@@ -6,106 +6,147 @@ class DiagnosticsResultWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Placeholder colors and styles - should be themed or constants
-    const Color primaryTextColor = Colors.black87;
-    const Color secondaryTextColor = Colors.black54;
-    const Color progressRedColor = Colors.pinkAccent;
-    const Color progressGreenColor = Colors.green;
-    const Color cardBackgroundColor = Colors.white;
-    const Color arrowIconColor = Colors.pinkAccent;
-
     return Container(
-      margin: const EdgeInsets.symmetric(vertical: 16.0),
-      padding: const EdgeInsets.all(16.0),
+      width: 367,
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
       decoration: BoxDecoration(
-        color: cardBackgroundColor,
-        borderRadius: BorderRadius.circular(16.0),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey.withOpacity(0.1),
-            spreadRadius: 1,
-            blurRadius: 5,
-            offset: const Offset(0, 2),
-          ),
-        ],
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(24),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          Stack(
             children: [
-              const Text(
-                'РЕЗУЛЬТАТ ДИАГНОСТИКИ',
-                style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                  color: primaryTextColor,
+              const Padding(
+                padding: EdgeInsets.only(right: 32), // Отступ для стрелки
+                child: Text(
+                  'РЕЗУЛЬТАТ ДИАГНОСТИКИ',
+                  style: TextStyle(
+                    fontFamily: 'Grtsk Giga',
+                    fontWeight: FontWeight.w500,
+                    fontSize: 19,
+                    letterSpacing: -1.66516,
+                    color: Colors.black,
+                  ),
                 ),
               ),
-              Container(
-                padding: const EdgeInsets.all(4),
-                decoration: BoxDecoration(
-                  color: arrowIconColor.withOpacity(0.2),
-                  shape: BoxShape.circle,
+              Positioned(
+                top: 8,
+                right: 8,
+                child: Container(
+                  width: 24,
+                  height: 24,
+                  decoration: BoxDecoration(
+                    color: const Color(0xFFDF2B50),
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: Center(
+                    child: SvgPicture.asset(
+                      'assets/icons/chevron_down.svg', // Замените на вашу иконку стрелки
+                      width: 12,
+                      height: 16,
+                      color: Colors.white,
+                    ),
+                  ),
                 ),
-                child: Icon(Icons.arrow_forward_ios, size: 12, color: arrowIconColor),
-                // child: SvgPicture.asset('assets/icons/arrow_right_red.svg', width: 16, height: 16), // Placeholder
               ),
             ],
           ),
-          const SizedBox(height: 4),
+          const SizedBox(height: 10),
           const Text(
             'По тест-полоске от 23.10.2024',
-            style: TextStyle(fontSize: 12, color: secondaryTextColor),
+            style: TextStyle(
+              fontFamily: 'Object Sans',
+              fontWeight: FontWeight.w400,
+              fontSize: 14,
+              color: Color(0xFF7B878E),
+            ),
           ),
-          const SizedBox(height: 16),
-          _buildProgressIndicator(
-            label: 'Высокий риск\nвоспаления',
-            value: 0.7, // Example value
-            color: progressRedColor,
-            textColor: secondaryTextColor,
-          ),
-          const SizedBox(height: 12),
-          _buildProgressIndicator(
-            label: 'Низкий риск\nкариеса',
-            value: 0.3, // Example value
-            color: progressGreenColor,
-            textColor: secondaryTextColor,
+          const SizedBox(height: 32),
+          Row(
+            children: [
+              Expanded(
+                child: _buildRiskIndicator(
+                  label: 'Высокий риск\nвоспаления',
+                  progressColor: const Color(0xFFDE949E),
+                  progressValue: 0.7, // Example value
+                ),
+              ),
+              const SizedBox(width: 8),
+              Expanded(
+                child: _buildRiskIndicator(
+                  label: 'Низкий риск\nкариеса',
+                  progressColor: const Color(0xFF99D16E),
+                  progressValue: 0.3, // Example value
+                ),
+              ),
+            ],
           ),
         ],
       ),
     );
   }
 
-  Widget _buildProgressIndicator({
+  Widget _buildRiskIndicator({
     required String label,
-    required double value,
-    required Color color,
-    required Color textColor,
+    required Color progressColor,
+    required double progressValue,
   }) {
-    return Row(
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        Expanded(
-          flex: 2,
-          child: Text(
-            label,
-            style: TextStyle(fontSize: 12, color: textColor),
-            textAlign: TextAlign.left,
+        Text(
+          label,
+          textAlign: TextAlign.center,
+          style: const TextStyle(
+            fontFamily: 'Object Sans',
+            fontWeight: FontWeight.w400,
+            fontSize: 14,
+            color: Color(0xFF7B878E),
           ),
         ),
-        const SizedBox(width: 16),
-        Expanded(
-          flex: 3,
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(8.0),
-            child: LinearProgressIndicator(
-              value: value,
-              backgroundColor: color.withOpacity(0.2),
-              valueColor: AlwaysStoppedAnimation<Color>(color),
-              minHeight: 10,
+        const SizedBox(height: 12),
+        Stack(
+          alignment: Alignment.centerLeft,
+          children: [
+            Container(
+              height: 24,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(12),
+                color: progressColor.withOpacity(0.2),
+              ),
             ),
-          ),
+            ClipRRect(
+              borderRadius: BorderRadius.circular(12),
+              child: SizedBox(
+                height: 24,
+                width: 163.5 * progressValue, // Adjust width based on value
+                child: DecoratedBox(
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      colors: [progressColor.withOpacity(0.8), progressColor],
+                      stops: const [0.0, 1.0],
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            Positioned(
+              right: 0,
+              child: Transform.rotate(
+                angle: -3.1415926535 * 180 / 180, // Rotate 180 degrees
+                child: Container(
+                  width: 24,
+                  height: 24,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(12),
+                    color: progressColor,
+                  ),
+                ),
+              ),
+            ),
+          ],
         ),
       ],
     );

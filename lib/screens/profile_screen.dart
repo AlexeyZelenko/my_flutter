@@ -12,15 +12,6 @@ class ProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Профиль'), // Title from the image
-        backgroundColor: Colors.transparent, // Assuming a transparent app bar or part of the body gradient
-        elevation: 0,
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios_new, color: Colors.black54), // Placeholder back button
-          onPressed: () => Navigator.of(context).pop(),
-        ),
-      ),
       body: Container(
         decoration: const BoxDecoration(
           gradient: LinearGradient(
