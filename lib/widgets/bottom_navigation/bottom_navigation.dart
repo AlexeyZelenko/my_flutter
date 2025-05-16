@@ -22,19 +22,25 @@ class BottomNavigation extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
-          _buildNavItem(0, 'assets/icons/home.svg', 'Главная'),
-          _buildNavItem(1, 'assets/icons/study.svg', 'Обучение'),
-          _buildNavItem(2, 'assets/icons/vector.svg', 'Помощник'),
-          _buildNavItem(3, 'assets/icons/shopping.svg', 'Магазин'),
-          _buildNavItem(4, 'assets/icons/user.svg', 'Профиль'),
+          _buildNavItem(0, 'assets/icons/menu_bottom/home.svg', 'assets/icons/menu_bottom/home_active.svg', 'Главная'),
+          _buildNavItem(1, 'assets/icons/menu_bottom/study.svg', 'assets/icons/menu_bottom/study_active.svg', 'Обучение'),
+          _buildNavItem(2, 'assets/icons/menu_bottom/vector.svg', 'assets/icons/menu_bottom/vector_active.svg', 'Помощник'),
+          _buildNavItem(3, 'assets/icons/menu_bottom/shopping.svg', 'assets/icons/menu_bottom/shopping_active.svg', 'Магазин'),
+          _buildNavItem(4, 'assets/icons/menu_bottom/user.svg', 'assets/icons/menu_bottom/user_active.svg', 'Профиль'),
         ],
       ),
     );
   }
 
-  Widget _buildNavItem(int index, String iconPath, String label) {
+  Widget _buildNavItem(
+      int index,
+      String inactiveIconPath,
+      String activeIconPath,
+      String label,
+      ) {
     return NavItem(
-      svgIconPath: iconPath,
+      inactiveSvgIconPath: inactiveIconPath,
+      activeSvgIconPath: activeIconPath,
       label: label,
       isActive: currentIndex == index,
       onTap: () => onTap(index),

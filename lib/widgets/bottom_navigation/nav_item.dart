@@ -2,28 +2,33 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class NavItem extends StatelessWidget {
-  final String? svgIconPath;
+  final String inactiveSvgIconPath;
+  final String activeSvgIconPath;
   final String label;
   final bool isActive;
-  final VoidCallback? onTap;
+  final VoidCallback onTap;
 
   const NavItem({
     super.key,
-    this.svgIconPath,
+    required this.inactiveSvgIconPath,
+    required this.activeSvgIconPath,
     required this.label,
-    this.isActive = false,
-    this.onTap,
+    required this.isActive,
+    required this.onTap,
   });
 
   @override
   Widget build(BuildContext context) {
+    final Color textColor = isActive ? Colors.white : Colors.white.withOpacity(0.6);
+    final String currentIconPath = isActive ? activeSvgIconPath : inactiveSvgIconPath;
+
     final TextStyle labelStyle = TextStyle(
       fontFamily: 'ObjectSans',
       fontWeight: FontWeight.w400,
       fontSize: 9.0,
       height: 1.2,
       letterSpacing: 0.0,
-      color: Colors.white.withOpacity(isActive ? 1 : 0.6),
+      color: textColor,
     );
 
     return GestureDetector(
@@ -37,18 +42,16 @@ class NavItem extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            if (svgIconPath != null)
-              SvgPicture.asset(
-                svgIconPath!,
-                colorFilter: const ColorFilter.mode(Colors.white, BlendMode.srcIn),
-                width: 20,
-                height: 20,
-              ),
+            SvgPicture.asset(
+              currentIconPath,
+              width: 24,
+              height: 24,
+              colorFilter: ColorFilter.mode(textColor, BlendMode.srcIn),
+            ),
             const SizedBox(height: 4),
             Text(
               label,
               style: labelStyle,
-              textAlign: TextAlign.center,
             ),
           ],
         ),
