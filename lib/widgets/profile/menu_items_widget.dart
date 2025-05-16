@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart'; // For SVG icons
+import 'package:flutter_svg/flutter_svg.dart';
 
 class MenuItemsWidget extends StatelessWidget {
   const MenuItemsWidget({super.key});
@@ -13,25 +13,25 @@ class MenuItemsWidget extends StatelessWidget {
 
     final List<Map<String, dynamic>> menuItems = [
       {
-        'icon': Icons.show_chart, // Placeholder, replace with SvgPicture.asset if available
+        'iconPath': 'assets/icons/profile/chart.svg',
         'text': 'Динамика результатов',
         'onTap': () { print('Динамика результатов tapped'); },
         'isLogout': false,
       },
       {
-        'icon': Icons.thumb_up_alt_outlined, // Placeholder
+        'iconPath': 'assets/icons/profile/thumb_up.svg',
         'text': 'Персональные рекомендации',
         'onTap': () { print('Персональные рекомендации tapped'); },
         'isLogout': false,
       },
       {
-        'icon': Icons.info_outline, // Placeholder
+        'iconPath': 'assets/icons/profile/info.svg',
         'text': 'О приложении',
         'onTap': () { print('О приложении tapped'); },
         'isLogout': false,
       },
       {
-        'icon': Icons.logout, // Placeholder
+        'iconPath': 'assets/icons/profile/exit.svg',
         'text': 'Выйти из аккаунта',
         'onTap': () { print('Выйти из аккаунта tapped'); },
         'isLogout': true,
@@ -43,12 +43,15 @@ class MenuItemsWidget extends StatelessWidget {
       child: Column(
         children: menuItems.map((item) {
           return ListTile(
-            leading: Icon(
-              item['icon'] as IconData?,
-              color: item['isLogout'] as bool ? logoutTextColor : iconColor,
-              size: 24,
+            leading: SvgPicture.asset(
+              item['iconPath'] as String,
+              colorFilter: ColorFilter.mode(
+                item['isLogout'] as bool ? logoutTextColor : iconColor,
+                BlendMode.srcIn,
+              ),
+              width: 24,
+              height: 24,
             ),
-            // leading: SvgPicture.asset(item['iconPath'], color: item['isLogout'] ? logoutTextColor : iconColor, width: 24, height: 24),
             title: Text(
               item['text'] as String,
               style: TextStyle(

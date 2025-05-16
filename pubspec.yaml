@@ -26,6 +26,7 @@ flutter:
     - assets/fonts/
     - assets/icons/
     - assets/icons/menu_bottom/
+    - assets/icons/profile/
     - assets/images/
     - assets/images/main/
     
