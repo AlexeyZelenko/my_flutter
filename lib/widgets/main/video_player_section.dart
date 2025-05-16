@@ -18,7 +18,7 @@ class _VideoPlayerSectionState extends State<VideoPlayerSection> {
       'title': '3 минуты с пользой',
     },
     {
-      'image': 'assets/images/main/toothpaste_in_mouth.png',
+      'image': 'assets/images/main/toothbrush.png',
       'title': 'Полезное видео #2',
     },
     {
@@ -68,7 +68,7 @@ class _VideoPlayerSectionState extends State<VideoPlayerSection> {
             ),
           );
         },
-      ),
+      ), 
     );
   }
 
@@ -87,47 +87,44 @@ class _VideoPlayerSectionState extends State<VideoPlayerSection> {
   }
 
   Widget _buildOverlayWithPlayButton(ThemeData theme, String title) {
-    return Positioned.fill(
-      top: 60,
-      left: 0, right: 0,
-      child: Container(
-        child: Center(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              InkWell(
-                onTap: () {
-                  debugPrint('Play button tapped on page $_currentPage');
-                },
-                child: Container(
-                  child: Center(
-                    child: SvgPicture.asset(
-                      'assets/icons/play_video.svg',
-                      width: 60, // Немного увеличим размер иконки
-                      height: 60,
-                    ),
-                  ),
-                ),
+    return Stack(
+      children: [
+        // Кнопка воспроизведения в центре
+        Positioned.fill(
+          child: Center(
+            child: InkWell(
+              onTap: () {
+                debugPrint('Play button tapped on page $_currentPage');
+              },
+              child: SvgPicture.asset(
+                'assets/icons/play_video.svg',
+                width: 60,
+                height: 60,
               ),
-              const SizedBox(height: 12),
-              SizedBox(
-                width: 120, // Увеличим ширину текста
-                child: Text(
-                  title,
-                  style: const TextStyle(
-                    fontFamily: 'ObjectSans',
-                    fontSize: 16.0,
-                    height: 1.1,
-                    letterSpacing: -0.5,
-                    color: Colors.black, // Добавим белый цвет текста для лучшей видимости на фоне
-                  ),
-                  textAlign: TextAlign.center,
-                ),
-              )
-            ],
+            ),
           ),
         ),
-      ),
+        // Текст внизу изображения
+        Positioned(
+          bottom: 60,
+          left: 0,
+          right: 0,
+          child: SizedBox(
+            width: 120,
+            child: Text(
+              title,
+              style: const TextStyle(
+                fontFamily: 'ObjectSans',
+                fontSize: 16.0,
+                height: 1.1,
+                letterSpacing: -0.5,
+                color: Colors.white,
+              ),
+              textAlign: TextAlign.center,
+            ),
+          ),
+        ),
+      ],
     );
   }
 
