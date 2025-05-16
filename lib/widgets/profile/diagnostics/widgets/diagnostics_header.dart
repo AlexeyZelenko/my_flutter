@@ -15,12 +15,12 @@ class DiagnosticsHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 60, // Общая высота заголовка
+      height: 60,
       child: Stack(
         children: [
-          // Иконка слева (выровнена по верху)
+
           Positioned(
-            top: 2, // Отступ сверху для иконки
+            top: 2,
             left: 0,
             child: SvgPicture.asset(
               icon,
@@ -29,9 +29,8 @@ class DiagnosticsHeader extends StatelessWidget {
             ),
           ),
 
-          // Заголовок (смещен вниз относительно иконок)
           Positioned(
-            top: 18, // Больший отступ сверху для текста
+            top: 18,
             left: 0,
             right: 0,
             child: Text(
@@ -48,9 +47,8 @@ class DiagnosticsHeader extends StatelessWidget {
             ),
           ),
 
-          // Кнопка справа (выровнена по верху)
           const Positioned(
-            top: 2, // Такой же отступ как у левой иконки
+            top: 2,
             right: 0,
             child: ExpandButton(),
           ),

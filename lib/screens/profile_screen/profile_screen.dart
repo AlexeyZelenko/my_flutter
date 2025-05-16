@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:myapp/widgets/profile/menu_items_widget.dart';
-import 'package:myapp/widgets/profile/profile_header_widget.dart';
+// import 'package:myapp/widgets/profile/profile_header_widget.dart';
+import 'package:myapp/widgets/profile/profile_header/profile_header.dart';
 import 'package:myapp/widgets/profile/stats_row_widget.dart';
 import 'package:myapp/widgets/profile/diagnostics/widgets/diagnostics_result_widget.dart';
 import 'package:myapp/widgets/profile/hygiene/widgets/hygiene_result_widget.dart';
@@ -33,7 +34,12 @@ class ProfileScreen extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 16.0),
                 sliver: SliverList(
                   delegate: SliverChildListDelegate([
-                    const ProfileHeaderWidget(),
+                    ProfileHeaderWidget(
+                      userName: 'ЕКАТЕРИНА', // Обязательный параметр
+                      score: '8/10',         // Обязательный параметр
+                      starsCount: '25',      // Обязательный параметр
+                      avatarImage: const AssetImage('assets/images/avatar.png'), // Обязательный параметр
+                    ),
                     const StatsRowWidget(),
                     const SizedBox(height: 16),
                     const DiagnosticsResultWidget(),
