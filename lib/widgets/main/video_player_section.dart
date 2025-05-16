@@ -66,7 +66,7 @@ class VideoPlayerSection extends StatelessWidget {
               ),
               const SizedBox(height: 12),
               SizedBox(
-                width: 75,
+                width: 80,
                 child: Text(
                   '3 минуты с пользой',
                   style: TextStyle(

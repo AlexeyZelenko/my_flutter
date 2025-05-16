@@ -42,7 +42,7 @@ class WideCardSection extends StatelessWidget {
           child: ElevatedButton(
             onPressed: onPressed,
             style: ElevatedButton.styleFrom(
-              padding: const EdgeInsets.fromLTRB(29, 20, 29, 20),
+              padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 12.0), // Зменшено відступи
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(64),
               ),
