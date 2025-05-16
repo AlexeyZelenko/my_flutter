@@ -8,16 +8,22 @@ import 'package:myapp/widgets/main/conscious_care_guide.dart';
 class MainScreenContent extends StatelessWidget {
   const MainScreenContent({super.key});
 
+  void _onDiagnosticsButtonPressed() {
+    print('Кнопка "Діагностика" натиснута!');
+  }
+
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Column(
-        children: const [
-          UserProfileHeader(),
-          VideoPlayerSection(),
-          WideCardSection(),
-          HelperMainPage(),
-          ConsciousCareGuide(),
+        children: [
+          UserProfileHeader(
+            onDiagnosticsPressed: _onDiagnosticsButtonPressed,
+          ),
+          const VideoPlayerSection(),
+          const WideCardSection(),
+          const HelperMainPage(),
+          const ConsciousCareGuide(),
         ],
       ),
     );

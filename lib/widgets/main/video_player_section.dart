@@ -18,7 +18,7 @@ class _VideoPlayerSectionState extends State<VideoPlayerSection> {
       'title': '3 минуты с пользой',
     },
     {
-      'image': 'assets/images/main/toothbrush.png',
+      'image': 'assets/images/main/toothpaste_in_mouth.png',
       'title': 'Полезное видео #2',
     },
     {

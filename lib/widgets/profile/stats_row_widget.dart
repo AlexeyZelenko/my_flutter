@@ -9,25 +9,31 @@ class StatsRowWidget extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(bottom: 16.0),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween, // Изменено с spaceAround на spaceBetween
         children: [
-          _buildStatItem(
-            context,
-            iconPath: 'assets/icons/shopping-basket.svg',
-            count: '70',
-            label: 'Мои заказы',
+          Expanded(
+            child: _buildStatItem(
+              context,
+              iconPath: 'assets/icons/shopping-basket.svg',
+              count: '70',
+              label: 'Мои заказы',
+            ),
           ),
-          _buildStatItem(
-            context,
-            iconPath: 'assets/icons/shopping-basket-line.svg',
-            count: '3',
-            label: 'Корзина',
+          Expanded(
+            child: _buildStatItem(
+              context,
+              iconPath: 'assets/icons/shopping-basket-line.svg',
+              count: '3',
+              label: 'Корзина',
+            ),
           ),
-          _buildStatItem(
-            context,
-            iconPath: 'assets/icons/heart.svg',
-            count: '22',
-            label: 'Избранное',
+          Expanded(
+            child: _buildStatItem(
+              context,
+              iconPath: 'assets/icons/heart.svg',
+              count: '22',
+              label: 'Избранное',
+            ),
           ),
         ],
       ),
@@ -35,11 +41,12 @@ class StatsRowWidget extends StatelessWidget {
   }
 
   Widget _buildStatItem(BuildContext context, {
+    // Параметры виджета
     required String iconPath,
     required String count,
     required String label,
   }) {
-    const double cardWidth = 120;
+    const double cardWidth = 110; // Уменьшена ширина для предотвращения переполнения
     const double cardHeight = 84;
     const double borderRadius = 24.0;
     const double padding = 16.0;
@@ -65,7 +72,10 @@ class StatsRowWidget extends StatelessWidget {
       color: Colors.black38,
     );
 
-    return Container(
+    // Используем FittedBox для автоматического масштабирования содержимого при необходимости
+    return FittedBox(
+      fit: BoxFit.scaleDown,
+      child: Container(
       width: cardWidth,
       height: cardHeight,
       padding: const EdgeInsets.all(padding),
@@ -111,6 +121,7 @@ class StatsRowWidget extends StatelessWidget {
           ),
         ],
       ),
+    ),
     );
   }
 }

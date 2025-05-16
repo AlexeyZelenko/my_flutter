@@ -20,13 +20,23 @@ class BottomNavigation extends StatelessWidget {
         borderRadius: BorderRadius.circular(35),
       ),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          _buildNavItem(0, 'assets/icons/menu_bottom/home.svg', 'assets/icons/menu_bottom/home_active.svg', 'Главная'),
-          _buildNavItem(1, 'assets/icons/menu_bottom/study.svg', 'assets/icons/menu_bottom/study_active.svg', 'Обучение'),
-          _buildNavItem(2, 'assets/icons/menu_bottom/vector.svg', 'assets/icons/menu_bottom/vector_active.svg', 'Помощник'),
-          _buildNavItem(3, 'assets/icons/menu_bottom/shopping.svg', 'assets/icons/menu_bottom/shopping_active.svg', 'Магазин'),
-          _buildNavItem(4, 'assets/icons/menu_bottom/user.svg', 'assets/icons/menu_bottom/user_active.svg', 'Профиль'),
+          Expanded(
+            child: _buildNavItem(0, 'assets/icons/menu_bottom/home.svg', 'assets/icons/menu_bottom/home_active.svg', 'Главная'),
+          ),
+          Expanded(
+            child: _buildNavItem(1, 'assets/icons/menu_bottom/study.svg', 'assets/icons/menu_bottom/study_active.svg', 'Обучение'),
+          ),
+          Expanded(
+            child: _buildNavItem(2, 'assets/icons/menu_bottom/vector.svg', 'assets/icons/menu_bottom/vector_active.svg', 'Помощник'),
+          ),
+          Expanded(
+            child: _buildNavItem(3, 'assets/icons/menu_bottom/shopping.svg', 'assets/icons/menu_bottom/shopping_active.svg', 'Магазин'),
+          ),
+          Expanded(
+            child: _buildNavItem(4, 'assets/icons/menu_bottom/user.svg', 'assets/icons/menu_bottom/user_active.svg', 'Профиль'),
+          ),
         ],
       ),
     );

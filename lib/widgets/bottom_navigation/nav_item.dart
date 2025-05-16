@@ -34,7 +34,7 @@ class NavItem extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+        padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 8),
         decoration: BoxDecoration(
           color: isActive ? Theme.of(context).primaryColor : Colors.transparent,
           borderRadius: BorderRadius.circular(40),

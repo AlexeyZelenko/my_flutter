@@ -14,35 +14,35 @@ class WideCardSection extends StatelessWidget {
     final iconWidget = isSvg
         ? SvgPicture.asset(
       iconPath,
-      width: 24,
-      height: 24,
+      width: 20, // Уменьшил размер иконки
+      height: 20, // Уменьшил размер иконки
     )
-        : ImageIcon(AssetImage(iconPath));
+        : ImageIcon(AssetImage(iconPath), size: 20);
 
     final textStyle = Theme.of(context).textTheme.bodySmall?.copyWith(
       fontFamily: 'ObjectSans',
       fontWeight: FontWeight.w400,
-      fontSize: 12.0,
+      fontSize: 11.0, // Уменьшил размер шрифта
       height: 1.0,
       letterSpacing: 0.0,
     ) ??
         const TextStyle(
           fontFamily: 'ObjectSans',
           fontWeight: FontWeight.w400,
-          fontSize: 12.0,
+          fontSize: 11.0, // Уменьшил размер шрифта
           height: 1.0,
           letterSpacing: 0.0,
         );
 
     return Expanded(
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 2.0),
+        padding: const EdgeInsets.symmetric(horizontal: 1.0), // Уменьшил горизонтальный отступ
         child: SizedBox(
           height: 60.0,
           child: ElevatedButton(
             onPressed: onPressed,
             style: ElevatedButton.styleFrom(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 12.0), // Зменшено відступи
+              padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 12.0), // Уменьшил горизонтальные отступы
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(64),
               ),
@@ -51,13 +51,17 @@ class WideCardSection extends StatelessWidget {
             ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisSize: MainAxisSize.min, // Минимальный размер по горизонтали
               children: [
                 iconWidget,
-                const SizedBox(width: 12),
-                Text(
-                  text,
-                  style: textStyle,
-                  textAlign: TextAlign.center,
+                const SizedBox(width: 8), // Уменьшил расстояние между иконкой и текстом
+                Flexible(
+                  child: Text(
+                    text,
+                    style: textStyle,
+                    textAlign: TextAlign.center,
+                    overflow: TextOverflow.ellipsis, // Добавил обрезание текста при переполнении
+                  ),
                 ),
               ],
             ),
@@ -70,8 +74,9 @@ class WideCardSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 45.0),
+      padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 45.0), // Уменьшил горизонтальные отступы
       child: Row(
+        mainAxisSize: MainAxisSize.max, // Максимальный размер по ширине
         children: [
           _buildStyledButton(
             text: 'Запись к врачу',
@@ -79,7 +84,7 @@ class WideCardSection extends StatelessWidget {
             context: context,
             onPressed: () {},
           ),
-          const SizedBox(width: 5.0),
+          const SizedBox(width: 4.0), // Уменьшил расстояние между кнопками
           _buildStyledButton(
             text: 'Состав продукта',
             iconPath: 'assets/icons/scanner.svg',
