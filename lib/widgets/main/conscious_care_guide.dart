@@ -33,12 +33,6 @@ class ConsciousCareGuide extends StatelessWidget {
           end: Alignment.topCenter,
           colors: [Color(0xFFF7E5E7), Color(0xFFF7E5E7)],
         ),
-        'foregroundGradient': const LinearGradient(
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
-          colors: [Colors.transparent, Color(0xCCFFFFFF)],
-          stops: [0.0, 1.0],
-        ),
         'title': 'Еще что-то важное',
         'image': 'assets/images/tooth_2.png',
       },
@@ -60,7 +54,7 @@ class ConsciousCareGuide extends StatelessWidget {
         );
 
     return Padding(
-      padding: const EdgeInsets.all(16.0).copyWith(right: 0), // Убираем отступ справа
+      padding: const EdgeInsets.all(16.0).copyWith(right: 0),
       child: Column(
         children: [
           Text(
@@ -79,12 +73,13 @@ class ConsciousCareGuide extends StatelessWidget {
           const SizedBox(height: 24),
           SingleChildScrollView(
             scrollDirection: Axis.horizontal,
+            padding: const EdgeInsets.only(left: 20.0), // Додаємо відступ зліва для прокрутки
             child: Row(
               children: cardsData.map((card) {
                 return Container(
                   width: 169,
                   height: 169,
-                  margin: EdgeInsets.only(right: cardsData.last == card ? 0 : 6), // Убираем отступ справа у последнего элемента
+                  margin: EdgeInsets.only(right: cardsData.last == card ? 0 : 6, left: 0), // Забираємо початковий відступ тут
                   decoration: BoxDecoration(
                     gradient: card['gradient'] as Gradient?,
                     borderRadius: BorderRadius.circular(24),

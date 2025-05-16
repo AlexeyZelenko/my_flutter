@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart'; // Для SVG-іконок
+import 'package:flutter_svg/flutter_svg.dart';
 
 class HelperMainPage extends StatelessWidget {
   const HelperMainPage({super.key});
@@ -26,7 +26,7 @@ class _Header extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
-    return Center( // Обертаємо Text віджетом Center
+    return Center(
       child: Text(
         'ПОМОЩНИК',
         style: textTheme.titleLarge?.copyWith(
