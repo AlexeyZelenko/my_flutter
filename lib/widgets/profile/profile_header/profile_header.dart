@@ -24,7 +24,7 @@ class ProfileHeaderWidget extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 16.0),
       child: SizedBox(
-        width: 310, // Фиксированная ширина всего компонента
+        width: 290, // Фиксированная ширина всего компонента
         height: 137,
         child: Stack(
           clipBehavior: Clip.none,
@@ -34,8 +34,9 @@ class ProfileHeaderWidget extends StatelessWidget {
             Positioned(
               top: 45, // Половина высоты аватара для перекрытия
               child: Container(
-                width: 310,
+                width: 290,
                 height: 28,
+                margin: const EdgeInsets.only(left: 25),
                 decoration: BoxDecoration(
                   color: ProfileHeaderColors.white,
                   borderRadius: BorderRadius.circular(15),
