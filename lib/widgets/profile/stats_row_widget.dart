@@ -39,7 +39,7 @@ class StatsRowWidget extends StatelessWidget {
     required String count,
     required String label,
   }) {
-    const double cardWidth = 125;
+    const double cardWidth = 120;
     const double cardHeight = 84;
     const double borderRadius = 24.0;
     const double padding = 16.0;
@@ -87,7 +87,7 @@ class StatsRowWidget extends StatelessWidget {
         children: [
           Row(
             mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               SvgPicture.asset(
                 iconPath,

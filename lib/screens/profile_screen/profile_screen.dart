@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:myapp/widgets/profile/menu_items_widget.dart';
-// import 'package:myapp/widgets/profile/profile_header_widget.dart';
 import 'package:myapp/widgets/profile/profile_header/profile_header.dart';
 import 'package:myapp/widgets/profile/stats_row_widget.dart';
 import 'package:myapp/widgets/profile/diagnostics/widgets/diagnostics_result_widget.dart';
@@ -12,6 +11,7 @@ class ProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.transparent, // Зробіть фон Scaffold прозорим
       body: Container(
         decoration: const BoxDecoration(
           gradient: LinearGradient(
@@ -23,8 +23,9 @@ class ProfileScreen extends StatelessWidget {
               Color(0xFFF0FAFF),
               Color(0xFFF5FAFF),
               Color(0xFFFFFFFF),
+              Color(0xFFFFFFFF),
             ],
-            stops: [0.0, 0.2336, 0.4136, 0.6282, 1.6592],
+            stops: [0.0, 0.2336, 0.4136, 0.6282, 1.0, 1.0],
           ),
         ),
         child: SafeArea(
@@ -35,10 +36,10 @@ class ProfileScreen extends StatelessWidget {
                 sliver: SliverList(
                   delegate: SliverChildListDelegate([
                     ProfileHeaderWidget(
-                      userName: 'ЕКАТЕРИНА', // Обязательный параметр
-                      score: '8/10',         // Обязательный параметр
-                      starsCount: '25',      // Обязательный параметр
-                      avatarImage: const AssetImage('assets/images/avatar.png'), // Обязательный параметр
+                      userName: 'ЕКАТЕРИНА',
+                      score: '8/10',
+                      starsCount: '25',
+                      avatarImage: const AssetImage('assets/images/avatar.png'),
                     ),
                     const StatsRowWidget(),
                     const SizedBox(height: 16),
