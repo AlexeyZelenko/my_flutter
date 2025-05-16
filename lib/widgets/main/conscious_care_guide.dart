@@ -54,7 +54,7 @@ class ConsciousCareGuide extends StatelessWidget {
         );
 
     return Padding(
-      padding: const EdgeInsets.all(16.0).copyWith(right: 0),
+      padding: const EdgeInsets.all(0).copyWith(right: 0),
       child: Column(
         children: [
           Text(
@@ -82,7 +82,7 @@ class ConsciousCareGuide extends StatelessWidget {
                   width: 169,
                   height: 169,
                   margin: EdgeInsets.only(
-                    left: index == 0 ? 0.0 : 0.0,
+                    left: index == 0 ? 10.0 : 0.0,
                     // только первая карточка с отступом
                     right: index == cardsData.length - 1 ? 0 : 6,
                   ),
