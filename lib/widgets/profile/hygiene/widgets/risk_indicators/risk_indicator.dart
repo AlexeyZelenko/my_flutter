@@ -5,34 +5,40 @@ class RiskIndicator extends StatelessWidget {
   final String label;
   final Color progressColor;
   final double progressValue;
+  final Color textColor;
 
   const RiskIndicator({
     super.key,
     required this.label,
     required this.progressColor,
     required this.progressValue,
+    this.textColor = const Color(0xFF000000), // Значение по умолчанию
   });
 
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
+      mainAxisSize: MainAxisSize.min,
       children: [
         Text(
-          label,
+          label.toUpperCase(), // Принудительный uppercase
           textAlign: TextAlign.center,
-          style: const TextStyle(
-            fontFamily: 'ObjectSans',
-            fontWeight: FontWeight.w400,
+          style: TextStyle(
+            fontFamily: 'GrtskGiga', // Убедитесь, что шрифт подключен
+            fontWeight: FontWeight.w500,
             fontSize: 14,
-            height: 1.0,
-            color: Color(0xFF7B878E),
+            height: 1.09, // line-height 109%
+            letterSpacing: -1.67,
+            color: textColor,
           ),
         ),
         const SizedBox(height: 12),
-        ProgressBar(
-          progressColor: progressColor,
-          progressValue: progressValue,
+        SizedBox(
+          child: ProgressBar(
+            progressColor: progressColor,
+            progressValue: progressValue,
+          ),
         ),
       ],
     );

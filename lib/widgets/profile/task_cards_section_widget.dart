@@ -107,7 +107,7 @@ class _TaskCardsSectionWidgetState extends State<TaskCardsSectionWidget> {
                     description: task['description'],
                     iconPath: task['iconPath'],
                     gradient: task['gradient'] as Gradient,
-                    isFirst: false,
+                    isFirst: index == 0, // Передаем флаг для первой карточки
                   ),
                 );
             },
@@ -166,7 +166,10 @@ class _TaskCardsSectionWidgetState extends State<TaskCardsSectionWidget> {
     return Container(
       width: cardWidth,
       height: cardHeight,
-      margin: const EdgeInsets.symmetric(horizontal: 6),
+      margin: EdgeInsets.only(
+        left: isFirst ? 16 : 6, // Больше отступ слева для первой карточки
+        right: 6,
+      ),
       decoration: BoxDecoration(
         gradient: gradient,
         borderRadius: BorderRadius.circular(borderRadius),

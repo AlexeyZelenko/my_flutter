@@ -14,23 +14,26 @@ class DiagnosticsHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      alignment: Alignment.centerLeft,
-      children: [
-        // Иконка слева
-        Padding(
-          padding: const EdgeInsets.only(right: 8, top: 15),
-          child: SvgPicture.asset(
-            icon,
-            width: 16,
-            height: 16,
+    return SizedBox(
+      height: 60, // Общая высота заголовка
+      child: Stack(
+        children: [
+          // Иконка слева (выровнена по верху)
+          Positioned(
+            top: 2, // Отступ сверху для иконки
+            left: 0,
+            child: SvgPicture.asset(
+              icon,
+              width: 16,
+              height: 16,
+            ),
           ),
-        ),
 
-        // Заголовок по центру
-        Center(
-          child: Padding(
-            padding: const EdgeInsets.only(top: 15),
+          // Заголовок (смещен вниз относительно иконок)
+          Positioned(
+            top: 18, // Больший отступ сверху для текста
+            left: 0,
+            right: 0,
             child: Text(
               title,
               textAlign: TextAlign.center,
@@ -44,15 +47,15 @@ class DiagnosticsHeader extends StatelessWidget {
               ),
             ),
           ),
-        ),
 
-        // Красная кнопка со стрелкой
-        const Positioned(
-          top: 0,
-          right: 0,
-          child: ExpandButton(),
-        ),
-      ],
+          // Кнопка справа (выровнена по верху)
+          const Positioned(
+            top: 2, // Такой же отступ как у левой иконки
+            right: 0,
+            child: ExpandButton(),
+          ),
+        ],
+      ),
     );
   }
 }

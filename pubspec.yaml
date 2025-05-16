@@ -41,7 +41,3 @@ flutter:
       fonts:
         - asset: assets/fonts/GrtskGiga-Medium.ttf
           weight: 500
-    - family: GolosText
-      fonts:
-        - asset: assets/fonts/GolosText-Medium.ttf
-          weight: 500

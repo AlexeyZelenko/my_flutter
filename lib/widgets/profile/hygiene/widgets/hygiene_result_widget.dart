@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'diagnostics_container.dart';
-import 'diagnostics_header.dart';
-import 'diagnostics_date_info.dart';
+import 'hygiene_container.dart';
+import 'hygiene_header.dart';
+import 'hygiene_date_info.dart';
 import 'risk_indicators/risk_indicators_row.dart';
 import 'risk_indicators/risk_indicator_data.dart';
 
-class DiagnosticsResultWidget extends StatelessWidget {
-  const DiagnosticsResultWidget({super.key});
+class HygieneLevelWidget extends StatelessWidget {
+  const HygieneLevelWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -21,14 +21,14 @@ class DiagnosticsResultWidget extends StatelessWidget {
           // Заголовок с иконкой и кнопкой
           const DiagnosticsHeader(
             icon: 'assets/icons/heart_grey_selected.svg',
-            title: 'РЕЗУЛЬТАТ\nДИАГНОСТИКИ',
+            title: 'УРОВЕНЬ\nГИГИЕНЫ',
           ),
 
           const SizedBox(height: 10),
 
           // Дата теста
           const DiagnosticsDateInfo(
-            date: 'По тест-полоске от 23.10.2024',
+            date: 'По результатам опроса',
           ),
 
           const SizedBox(height: 32),
@@ -37,14 +37,15 @@ class DiagnosticsResultWidget extends StatelessWidget {
           const RiskIndicatorsRow(
             indicators: [
               RiskIndicatorData(
-                label: 'Высокий риск\nвоспаления',
-                progressColor: Color(0xFFDE949E),
-                progressValue: 0.6,
-              ),
-              RiskIndicatorData(
-                label: 'Низкий риск\nкариеса',
+                label: '7 / 10',
                 progressColor: Color(0xFF99D16E),
-                progressValue: 0.15,
+                progressValue: 0.7,
+                textStyle: TextStyle( // Добавляем свои стили
+                  fontFamily: 'YourCustomFont',
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black,
+                ),
               ),
             ],
           ),

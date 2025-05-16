@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class ProgressBar extends StatelessWidget {
   final Color progressColor;
-  final double progressValue;
+  final double progressValue; // Диапазон 0..1
 
   const ProgressBar({
     super.key,
@@ -18,21 +18,23 @@ class ProgressBar extends StatelessWidget {
         borderRadius: BorderRadius.circular(12),
         color: progressColor.withOpacity(0.2),
       ),
-      clipBehavior: Clip.hardEdge,
-      child: Stack(
-        children: [
-          Positioned(
-            left: 0,
-            child: Container(
-              height: 24,
-              width: progressValue * 100.0,
-              decoration: BoxDecoration(
-                color: progressColor,
-                borderRadius: BorderRadius.circular(12),
+      clipBehavior: Clip.antiAlias,
+      child: Align(
+        alignment: Alignment.centerLeft,
+        child: AnimatedFractionallySizedBox(
+          duration: const Duration(milliseconds: 300),
+          widthFactor: progressValue.clamp(0.0, 1.0),
+          child: Container(
+            height: 24,
+            decoration: BoxDecoration(
+              color: progressColor,
+              borderRadius: BorderRadius.horizontal(
+                left: Radius.circular(12),
+                right: Radius.zero,
               ),
             ),
           ),
-        ],
+        ),
       ),
     );
   }

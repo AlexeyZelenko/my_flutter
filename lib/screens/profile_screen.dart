@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:myapp/widgets/profile/diagnostics_result_widget.dart';
-import 'package:myapp/widgets/profile/hygiene_level_widget.dart';
+// import 'package:myapp/widgets/profile/hygiene_level_widget.dart';
 import 'package:myapp/widgets/profile/menu_items_widget.dart';
 import 'package:myapp/widgets/profile/profile_header_widget.dart';
 import 'package:myapp/widgets/profile/stats_row_widget.dart';
-import 'package:myapp/widgets/profile/task_cards_section_widget.dart';
+import 'package:myapp/widgets/profile/diagnostics/widgets/diagnostics_result_widget.dart';
+import 'package:myapp/widgets/profile/hygiene/widgets/hygiene_result_widget.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -37,7 +37,6 @@ class ProfileScreen extends StatelessWidget {
                     const ProfileHeaderWidget(),
                     const StatsRowWidget(),
                     const SizedBox(height: 16),
-                    const TaskCardsSectionWidget(),
                     const DiagnosticsResultWidget(),
                     const HygieneLevelWidget(),
                     const MenuItemsWidget(),

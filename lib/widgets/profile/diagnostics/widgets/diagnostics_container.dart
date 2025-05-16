@@ -14,7 +14,8 @@ class DiagnosticsContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: width,
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
+      height: 212,
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
       margin: const EdgeInsets.only(bottom: 16),
       decoration: BoxDecoration(
         color: Colors.white,
