@@ -39,12 +39,12 @@ class ConsciousCareGuide extends StatelessWidget {
     ];
 
     final cardTextStyle = Theme.of(context).textTheme.bodyMedium?.copyWith(
-      fontFamily: 'ObjectSans',
-      fontWeight: FontWeight.w400,
-      fontSize: 12.0,
-      height: 1.1,
-      letterSpacing: 0.0,
-    ) ??
+              fontFamily: 'ObjectSans',
+              fontWeight: FontWeight.w400,
+              fontSize: 12.0,
+              height: 1.1,
+              letterSpacing: 0.0,
+            ) ??
         const TextStyle(
           fontFamily: 'ObjectSans',
           fontWeight: FontWeight.w400,
@@ -73,13 +73,19 @@ class ConsciousCareGuide extends StatelessWidget {
           const SizedBox(height: 24),
           SingleChildScrollView(
             scrollDirection: Axis.horizontal,
-            padding: const EdgeInsets.only(left: 20.0), // Додаємо відступ зліва для прокрутки
             child: Row(
-              children: cardsData.map((card) {
+              children: cardsData.asMap().entries.map((entry) {
+                final index = entry.key;
+                final card = entry.value;
+
                 return Container(
                   width: 169,
                   height: 169,
-                  margin: EdgeInsets.only(right: cardsData.last == card ? 0 : 6, left: 0), // Забираємо початковий відступ тут
+                  margin: EdgeInsets.only(
+                    left: index == 0 ? 0.0 : 0.0,
+                    // только первая карточка с отступом
+                    right: index == cardsData.length - 1 ? 0 : 6,
+                  ),
                   decoration: BoxDecoration(
                     gradient: card['gradient'] as Gradient?,
                     borderRadius: BorderRadius.circular(24),
