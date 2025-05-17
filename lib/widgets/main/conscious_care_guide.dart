@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 
+/// Виджет, отображающий гид по осознанной заботе о зубах.
+/// 
+/// Отображает горизонтальный список карточек с информацией
+/// о различных аспектах ухода за зубами.
 class ConsciousCareGuide extends StatelessWidget {
   const ConsciousCareGuide({super.key});
 
@@ -82,9 +86,9 @@ class ConsciousCareGuide extends StatelessWidget {
                   width: 169,
                   height: 169,
                   margin: EdgeInsets.only(
-                    left: index == 0 ? 10.0 : 0.0,
-                    // только первая карточка с отступом
-                    right: index == cardsData.length - 1 ? 0 : 6,
+                    left: index == 0 ? 16.0 : 12.0,
+                    // увеличенные отступы между карточками для предотвращения перекрытия
+                    right: index == cardsData.length - 1 ? 16.0 : 0.0,
                   ),
                   decoration: BoxDecoration(
                     gradient: card['gradient'] as Gradient?,

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart'; // For SVG icons
+import 'package:flutter_svg/flutter_svg.dart';
 
 class StatsRowWidget extends StatelessWidget {
   const StatsRowWidget({super.key});
@@ -46,7 +46,7 @@ class StatsRowWidget extends StatelessWidget {
     required String count,
     required String label,
   }) {
-    const double cardWidth = 110; // Уменьшена ширина для предотвращения переполнения
+    const double cardWidth = 110;
     const double cardHeight = 84;
     const double borderRadius = 24.0;
     const double padding = 16.0;
