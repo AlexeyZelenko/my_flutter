@@ -89,18 +89,48 @@ class _TaskCardsSectionWidgetState extends State<TaskCardsSectionWidget> {
             itemCount: tasks.length,
             itemBuilder: (context, index) {
                 final task = tasks[index];
-                // Применяем анимацию масштабирования для текущей карточки
-                return ScaleAnimationBuilder(
-                  controller: _pageController,
-                  index: index,
-                  child: TaskCard(
-                    stars: task['stars'],
-                    subtitle: task['subtitle'],
-                    description: task['description'],
-                    iconPath: task['iconPath'],
-                    gradient: task['gradient'] as Gradient,
-                    isFirst: index == 0, // Передаем флаг для первой карточки
-                  ),
+                // Применяем комбинированную анимацию: масштабирование и появление
+                return AnimatedBuilder(
+                  animation: _pageController,
+                  builder: (context, child) {
+                    // Анимация масштабирования
+                    double scale = 1.0;
+                    if (_pageController.position.haveDimensions) {
+                      scale = 1.0 - ((_pageController.page! - index).abs() * 0.1).clamp(0.0, 0.15);
+                    }
+                    
+                    // Анимация прозрачности
+                    double opacity = 1.0;
+                    if (_pageController.position.haveDimensions) {
+                      opacity = 1.0 - ((_pageController.page! - index).abs() * 0.3).clamp(0.0, 0.6);
+                    }
+                    
+                    return TweenAnimationBuilder<double>(
+                      tween: Tween<double>(begin: 0.0, end: 1.0),
+                      duration: Duration(milliseconds: 300 + (index * 100)),
+                      curve: Curves.easeOutQuint,
+                      builder: (context, value, child) {
+                        return Transform.translate(
+                          offset: Offset(0, 30 * (1 - value)),
+                          child: Opacity(
+                            opacity: value * opacity,
+                            child: Transform.scale(
+                              scale: scale * (0.85 + (0.15 * value)),
+                              child: child,
+                            ),
+                          ),
+                        );
+                      },
+                      child: TaskCard(
+                        stars: task['stars'],
+                        subtitle: task['subtitle'],
+                        description: task['description'],
+                        iconPath: task['iconPath'],
+                        gradient: task['gradient'] as Gradient,
+                        isFirst: index == 0, // Передаем флаг для первой карточки
+                      ),
+                    );
+                  },
                 );
             },
           ),

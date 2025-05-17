@@ -3,6 +3,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 import '../constants/colors.dart';
 import '../constants/typography.dart';
 import 'progress_ring.dart';
+import '../../../../widgets/animations/fade_in_animation.dart';
+import '../../../../widgets/animations/animated_button.dart';
 
 class AvatarBlock extends StatelessWidget {
   final String name;
@@ -16,49 +18,57 @@ class AvatarBlock extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Используем LayoutBuilder для адаптации под разные размеры экрана
-    return LayoutBuilder(
-      builder: (context, constraints) {
-        // Определяем, является ли устройство планшетом
-        final isTablet = MediaQuery.of(context).size.width >= 600;
+    // Используем MediaQuery для определения размера экрана
+    final screenWidth = MediaQuery.of(context).size.width;
+    final isTablet = screenWidth >= 600;
 
-        return Container(
-          // Адаптивная ширина вместо фиксированной
-          width: isTablet ? 140 : 124,
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              // Контейнер для аватара и кнопки редактирования
-              Container(
-                width: 87,
-                height: 87,
-                child: Stack(
-                  clipBehavior: Clip.none, // Предотвращает обрезание дочерних элементов
-                  alignment: Alignment.center,
-                  children: [
-                    const ProgressRing(),
-                    // White border
-                    Container(
-                      width: 79,
-                      height: 79,
-                      decoration: const BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: ProfileHeaderColors.white,
-                      ),
+    // Адаптивные размеры блоков
+    final blockWidth = isTablet ? 140.0 : 124.0;
+
+    return FadeInAnimation(
+      // Добавляем анимацию появления с небольшой задержкой
+      delay: const Duration(milliseconds: 200),
+      offset: const Offset(0, 20),
+      child: SizedBox(
+        width: blockWidth,
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            // Контейнер для аватара и кнопки редактирования
+            SizedBox(
+              width: 87,
+              height: 87,
+              child: Stack(
+                clipBehavior: Clip.none, // Предотвращает обрезание дочерних элементов
+                alignment: Alignment.center,
+                children: [
+                  const ProgressRing(),
+                  // White border
+                  Container(
+                    width: 79,
+                    height: 79,
+                    decoration: const BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: ProfileHeaderColors.white,
                     ),
-                    // Avatar
-                    CircleAvatar(
-                      radius: 39,
-                      backgroundColor: Colors.grey[300],
-                      backgroundImage: avatarImage,
-                      child: avatarImage == null
-                          ? const Icon(Icons.person, size: 40, color: ProfileHeaderColors.grayDark)
-                          : null,
-                    ),
-                    // Edit button - улучшенное позиционирование
-                    Positioned(
-                      right: isTablet ? 0 : -2, // Корректируем позицию для планшетов и маленьких экранов
-                      bottom: isTablet ? 0 : -2, // Корректируем позицию для планшетов и маленьких экранов
+                  ),
+                  // Avatar
+                  CircleAvatar(
+                    radius: 39,
+                    backgroundColor: Colors.grey[300],
+                    backgroundImage: avatarImage,
+                    child: avatarImage == null
+                        ? const Icon(Icons.person, size: 40, color: ProfileHeaderColors.grayDark)
+                        : null,
+                  ),
+                  // Edit button - улучшенное позиционирование с анимацией
+                  Positioned(
+                    right: isTablet ? 0 : -2, // Корректируем позицию для планшетов и маленьких экранов
+                    bottom: isTablet ? 0 : -2, // Корректируем позицию для планшетов и маленьких экранов
+                    child: AnimatedButton(
+                      scaleDown: 0.9,
+                      duration: const Duration(milliseconds: 100),
+                      onPressed: () {},
                       child: Container(
                         width: 24,
                         height: 24,
@@ -78,25 +88,25 @@ class AvatarBlock extends StatelessWidget {
                         ),
                       ),
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
-              const SizedBox(height: 16),
-              // Улучшенный контейнер для текста с ограничением по ширине
-              Container(
-                width: isTablet ? 140 : 124,
-                child: Text(
-                  name.toUpperCase(),
-                  style: ProfileHeaderTypography.nameTextStyle,
-                  textAlign: TextAlign.center,
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis,
-                ),
+            ),
+            const SizedBox(height: 16),
+            // Улучшенный контейнер для текста с ограничением по ширине
+            SizedBox(
+              width: blockWidth,
+              child: Text(
+                name.toUpperCase(),
+                style: ProfileHeaderTypography.nameTextStyle,
+                textAlign: TextAlign.center,
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
               ),
-            ],
-          ),
-        );
-      },
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
