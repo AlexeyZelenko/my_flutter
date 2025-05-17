@@ -1,16 +1,87 @@
-# myapp
+# SPLAT Mobile App
 
-A new Flutter project.
+## О проекте
 
-## Getting Started
+SPLAT Mobile App - это мобильное приложение, разработанное с использованием Flutter. Приложение предоставляет современный пользовательский интерфейс с анимированными переходами между экранами и адаптивным дизайном.
 
-This project is a starting point for a Flutter application.
+## Структура проекта
 
-A few resources to get you started if this is your first Flutter project:
+```
+myapp/
+├── android/         # Нативный код для Android
+├── assets/          # Ресурсы приложения
+│   ├── fonts/       # Шрифты (DrukCyr, ObjectSans, GrtskGiga)
+│   ├── icons/       # Иконки приложения
+│   └── images/      # Изображения
+├── lib/             # Исходный код Dart
+│   ├── main.dart    # Точка входа в приложение
+│   ├── screens/     # Экраны приложения
+│   ├── theme/       # Настройки темы
+│   └── widgets/     # Многоразовые виджеты
+│       └── animations/ # Компоненты анимации
+└── web/             # Веб-версия приложения
+```
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## Технологии и зависимости
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- Flutter SDK: >=3.2.3 <4.0.0
+- Основные пакеты:
+  - cupertino_icons: ^1.0.2
+  - lucide_icons: ^0.257.0
+  - google_fonts: ^6.1.0
+  - cached_network_image: ^3.3.0
+  - flutter_svg: ^2.1.0
+
+## Особенности
+
+- Современный пользовательский интерфейс
+- Анимированные переходы между экранами
+- Кастомные шрифты (DrukCyr, ObjectSans, GrtskGiga)
+- Адаптивный дизайн
+
+## Установка и запуск
+
+### Требования
+
+- Flutter SDK
+- Android Studio / VS Code
+- Эмулятор Android или устройство iOS
+
+### Шаги установки
+
+1. Клонируйте репозиторий:
+   ```bash
+   git clone <url-репозитория>
+   cd myapp
+   ```
+
+2. Установите зависимости:
+   ```bash
+   flutter pub get
+   ```
+
+3. Запустите приложение:
+   ```bash
+   flutter run
+   ```
+
+## Разработка
+
+### Структура кода
+
+Приложение использует архитектуру, основанную на разделении кода на экраны, виджеты и темы. Основные компоненты:
+
+- **main.dart**: Точка входа в приложение, настраивает глобальные параметры
+- **screens/**: Содержит экраны приложения, включая MainScreen
+- **theme/**: Настройки темы приложения через AppTheme
+- **widgets/**: Многоразовые компоненты, включая анимации
+
+### Навигация
+
+Приложение использует систему маршрутизации Flutter с анимированными переходами между экранами.
+
+## Ресурсы для изучения Flutter
+
+- [Лаборатория: Напишите свое первое Flutter приложение](https://docs.flutter.dev/get-started/codelab)
+- [Книга рецептов: Полезные примеры Flutter](https://docs.flutter.dev/cookbook)
+- [Онлайн документация](https://docs.flutter.dev/), которая предлагает руководства, примеры, рекомендации по мобильной разработке и полный справочник API.
