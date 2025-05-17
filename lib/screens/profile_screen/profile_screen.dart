@@ -4,6 +4,7 @@ import 'package:myapp/widgets/profile/profile_header/profile_header.dart';
 import 'package:myapp/widgets/profile/stats_row_widget.dart';
 import 'package:myapp/widgets/profile/diagnostics/widgets/diagnostics_result_widget.dart';
 import 'package:myapp/widgets/profile/hygiene/widgets/hygiene_result_widget.dart';
+// import 'package:myapp/widgets/profile/task_cards/task_cards_section.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -45,6 +46,7 @@ class ProfileScreen extends StatelessWidget {
                     const SizedBox(height: 16),
                     const DiagnosticsResultWidget(),
                     const HygieneLevelWidget(),
+                    // const TaskCardsSectionWidget(),
                     const MenuItemsWidget(),
                     const SizedBox(height: 20),
                   ]),
